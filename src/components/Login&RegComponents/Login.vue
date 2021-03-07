@@ -13,6 +13,16 @@
             <Loader />
         </div>           
     </main>
+    <div class="flex justify-center items-center">
+        <div class="inline bg-white p-6 rounded-md shadow">
+            <div class="w-96">
+                {{downText}}
+                <router-link class="uppercase" :to="{name: (isCurrPageLogin === 'login'? 'register': 'login')}">
+                    {{isCurrPageLogin === 'login'? 'register' : 'log in'}}
+                </router-link>
+            </div> 
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -39,6 +49,9 @@ export default defineComponent({
         console.log(firebase.auth().currentUser);
     },
     computed:{
+        downText():string{
+            return this.isCurrPageLogin === 'login'? 'I don\'t have an account': 'I have an account'
+        },
         isCurrPageLogin():string{
             return this.$route.name !== 'login'? 'register' : 'login'
         },
@@ -85,6 +98,9 @@ export default defineComponent({
 
 <style scoped>
     .myLogin{
-        height: calc(100vh - 196px);
+        /* height: calc(100vh - 196px); */
+        flex-basis: auto;
+        flex-grow: 3;
+        /* flex-shrink: 1; */
     }
 </style>
